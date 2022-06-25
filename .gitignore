@@ -4,6 +4,8 @@ AAG/Temp/
 AAG/Build/
 AAG/Debug/
 AAG.sln
+AAG/Logs/
+AAG/UserSettings/
 
 #本地测试代码
 *localTest*
