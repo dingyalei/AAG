@@ -1,0 +1,9 @@
+AAG/Library/
+AAG/obj/
+AAG/Temp/
+AAG/Build/
+AAG/Debug/
+AAG.sln
+
+#本地测试代码
+*localTest*
