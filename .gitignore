@@ -6,6 +6,8 @@ AAG/Debug/
 AAG.sln
 AAG/Logs/
 AAG/UserSettings/
+AAG/*csproj
+AAG/*idea
 
 #本地测试代码
 *localTest*
