@@ -1,13 +1,11 @@
 ﻿using System;
 using FullSerializer;
-using UnityEngine;
 
 namespace AAJBSON
 {
     public static class AAJbsonMapper
     {
         private static fsSerializer _serializer = new fsSerializer();
-        
         
         public static string ToJson<T>(T instance, bool prettifyJson = false)
         {
@@ -16,8 +14,8 @@ namespace AAJBSON
         
         public static string ToJson(Type type, object instance, bool prettifyJson = false)
         {
-            _serializer.InternalSerialize_1_ProcessCycles(type, null, instance, out var result);
-            //_serializer.TrySerialize(instance, out var result);
+            //_serializer.TrySerialize(type, null, instance, out var result).AssertSuccess();
+            _serializer.TrySerialize(instance, out var result).AssertSuccess();
             return fsJsonPrinter.FormatJson(result, prettifyJson);
         }
         
