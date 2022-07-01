@@ -16,26 +16,27 @@ namespace Utils
                 {
                     instance = new T();
                 }
+
                 return instance;
             }
         }
     }
-    
+
     public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         private static T instance;
+
         public static T Instance
         {
-            get{return instance;}
+            get { return instance; }
         }
-        
+
         protected virtual void Awake()
         {
             if (instance == null)
             {
-                instance = (T)this;
+                instance = (T) this;
             }
         }
     }
 }
-
