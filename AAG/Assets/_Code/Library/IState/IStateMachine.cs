@@ -14,7 +14,7 @@
             protected set;
         }
 
-        void ChangeState(T nextState)
+        public void ChangeState(T nextState)
         {
             if (nextState != null && !Equals(nextState, CurrentState))
             {
@@ -27,6 +27,14 @@
                 }
                 
                 CurrentState.Enter();
+            }
+        }
+
+        public void Update()
+        {
+            if (CurrentState != null)
+            {
+                CurrentState.Update();
             }
         }
     }
