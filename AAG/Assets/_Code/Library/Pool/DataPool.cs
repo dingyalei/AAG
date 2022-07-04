@@ -42,19 +42,22 @@ namespace Library
 
         public void Return(T t)
         {
-            T defaultT = default(T);
-            
-            if (!object.ReferenceEquals(t, defaultT))
+            if (t == null)
             {
-                if (_stack.Contains(t))
-                {
-                    Log.Error("池内已经有了该对象，需要排查单一对象重复return");
-                    return;
-                }
-                
-                t.OnRecycle();
-                _stack.Push(t);    
+                return;
             }
+            
+            if (_stack.Count > 0 && object.ReferenceEquals(_stack.Peek(), t))
+            {
+                Log.Error("池内已经有了该对象，需要排查单一对象重复return");
+                return;
+            }
+
+            StackCountHelp();    
+            
+            t.OnRecycle();
+            _stack.Push(t);    
+            
         }
 
         public void CleanUp()
@@ -79,6 +82,15 @@ namespace Library
         private void ClearCountNum()
         {
             _nowCount = 0;
+        }
+
+        [Conditional("UNITY_EDITOR")]
+        private void StackCountHelp()
+        {
+            if (_stack.Count > CountMax)
+            {
+                Log.Error("注意对象池对象数量超出预期");
+            }
         }
 
         #endregion
