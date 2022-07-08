@@ -360,13 +360,16 @@ namespace Utils
 
     public abstract class CsvDataBase
     {
-        private readonly string FILE_PATH_PREFIX = "Assets/Resources/Config/";
+        private readonly string FILE_PATH_PREFIX = Application.streamingAssetsPath + "/Config/";
         private readonly string FILE_PATH_SUFFIX = ".csv";
 
         private readonly string UUIDKey = "CSVBASE";
         public string FileName
         {
-            get { return this.GetType().GetCustomAttribute<CsvReaderAttribute>().FileName; }
+            get
+            {
+                return GetType().GetCustomAttribute<CsvReaderAttribute>().FileName;
+            }
         }
         public List<T> GetDataObjects<T>() where T : new()
         {

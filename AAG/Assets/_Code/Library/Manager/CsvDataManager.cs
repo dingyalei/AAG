@@ -16,21 +16,24 @@ public class CsvDataManager : Singleton<CsvDataManager>
         
         foreach (var data in csvDataList)
         {
-            data.Value.OnAllocated();
+            data.Value?.OnAllocated();
         }
     }
 
-    public T GetDataBase<T>(string key) where T : class
+    public T GetDataBase<T>(string key) where T : CsvDataBase
     {
-        csvDataList.TryGetValue(key, out CsvDataBase data);
-        return data as T;
+        if (csvDataList.TryGetValue(key, out CsvDataBase data))
+        {
+            return data as T;
+        }
+        return null;
     } 
     
     public void OnDestroy()
     {
         foreach (var data in csvDataList)
         {
-            data.Value.DeAllocated();
+            data.Value?.DeAllocated();
         }
     }
 }
